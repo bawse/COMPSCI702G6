@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">COMPSCI702G6</string>
+    <string name="edit_number">Enter the number of calories</string>
+    <string name="button_calculate">Calculate</string>
+    <string name="lock_message">How many calories do you want to burn?</string>
+    <string name="edit_weight">Enter your weight in kg</string>
+    <string name="lock_weight">How much do you weigh in kg?</string>
+    <string name="lock_exercise">What form of exercise will you do?</string>
+    <string-array name="exercise_array">
+        <item>Walking</item>
+        <item>Jogging</item>
+        <item>Running</item>
+    </string-array>
 </resources>
