@@ -16,7 +16,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_display_message);
 
         Intent intent = getIntent();
-        String[] calculationInfo = intent.getStringArrayExtra(MainActivity.EXTRA_MESSAGE);
+        String[] calculationInfo = intent.getStringArrayExtra(CalculateMinutes.EXTRA_MESSAGE);
 
         String caloriesString = calculationInfo[0];
         String weightString = calculationInfo[1];
