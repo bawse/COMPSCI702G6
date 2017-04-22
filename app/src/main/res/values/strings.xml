@@ -10,6 +10,10 @@
         <item>Walking</item>
         <item>Jogging</item>
         <item>Running</item>
+        <item>Swimming</item>
+        <item>Tennis</item>
+        <item>Basketball</item>
+        <item>Weight Training</item>
     </string-array>
     <string name="calculate_minutes">Calculate Time</string>
     <string name="calculate_calories">Calculate Calories</string>

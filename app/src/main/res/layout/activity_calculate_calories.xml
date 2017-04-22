@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="app.compsci702g6.CalculateCalories">
+    tools:context="app.compsci702g6.Calculate">
 
     <TextView
         android:id="@+id/textView5"
@@ -105,7 +105,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="32dp"
-        android:onClick="calculateCalories"
+        android:onClick="calculate"
         android:text="@string/button_calculate"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

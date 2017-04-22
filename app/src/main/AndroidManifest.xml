@@ -16,32 +16,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".DisplayMessageActivity"
-            android:parentActivityName=".CalculateMinutes">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".CalculateMinutes" />
-        </activity>
-        <activity
-            android:name=".CalculateMinutes"
-            android:parentActivityName=".MainActivity">
+        <activity android:name=".Calculate"
+            android:parentActivityName = ".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity
-            android:name=".CalculateCalories"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
-        <activity android:name=".DisplayCaloriesActivity"
-            android:parentActivityName=".CalculateCalories">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".CalculateCalories" />
+        <activity android:name=".DisplayActivity">
         </activity>
     </application>
 
