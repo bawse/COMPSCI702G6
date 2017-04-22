@@ -23,4 +23,9 @@ public class MainActivity extends Activity {
         Intent intent = new Intent(this, CalculateCalories.class);
         startActivity(intent);
     }
+
+    public void RetrieveAPIResponse(View view){
+        Intent intent = new Intent(this, RetrieveAPIResponseActivity.class);
+        startActivity(intent);
+    }
 }
