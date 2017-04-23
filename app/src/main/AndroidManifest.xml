@@ -44,7 +44,8 @@
                 android:value=".CalculateCalories" />
         </activity>
         <activity android:name=".RetrieveAPIResponseActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateAlwaysHidden|adjustResize|adjustPan">
             <meta-data
                 android:name="android:support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
