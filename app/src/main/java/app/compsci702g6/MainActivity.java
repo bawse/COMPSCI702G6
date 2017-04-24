@@ -31,4 +31,9 @@ public class MainActivity extends Activity {
         intent.putExtra(EXTRA_MESSAGE, activity);
         startActivity(intent);
     }
+
+    public void RetrieveAPIResponse(View view){
+        Intent intent = new Intent(this, RetrieveAPIResponseActivity.class);
+        startActivity(intent);
+    }
 }

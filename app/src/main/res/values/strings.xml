@@ -18,4 +18,5 @@
     <string name="calculate_minutes">Calculate Time</string>
     <string name="calculate_calories">Calculate Calories</string>
     <string name="exercise_time">How long will you do the exercise for?</string>
+    <string name="food_name">Food name</string>
 </resources>
