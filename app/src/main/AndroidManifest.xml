@@ -11,25 +11,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Activities.MainActivity" />
         <activity
-            android:name=".Calculate"
-            android:parentActivityName=".MainActivity">
+            android:name=".Utilities.Calculate"
+            android:parentActivityName=".Activities.MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".Activities.MainActivity" />
         </activity>
-        <activity android:name=".DisplayActivity" />
+        <activity android:name=".Activities.DisplayActivity" />
         <activity
-            android:name=".RetrieveAPIResponseActivity"
-            android:parentActivityName=".MainActivity"
+            android:name=".Activities.RetrieveAPIResponseActivity"
+            android:parentActivityName=".Activities.MainActivity"
             android:windowSoftInputMode="stateAlwaysHidden|adjustResize|adjustPan">
             <meta-data
                 android:name="android:support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
         <activity
-            android:name=".UIActivity"
+            android:name=".Activities.UIActivity"
             android:label="@string/title_activity_ui">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,10 +39,10 @@
         </activity>
 
         <service
-            android:name=".MyIntentService"
+            android:name=".Activities.MyIntentService"
             android:exported="false" />
         <service
-            android:name=".CalculateService"
+            android:name=".Services.CalculateService"
             android:enabled="true"
             android:exported="true"></service>
     </application>

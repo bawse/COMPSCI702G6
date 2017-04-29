@@ -1,4 +1,4 @@
-package app.compsci702g6;
+package app.compsci702g6.Activities;
 
 
 import android.os.Bundle;
@@ -18,6 +18,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import app.compsci702g6.R;
 import cz.msebera.android.httpclient.Header;
 
 /**

@@ -1,4 +1,4 @@
-package app.compsci702g6;
+package app.compsci702g6.Activities;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -18,7 +18,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -33,6 +32,9 @@ import android.widget.Toast;
 
 import com.tmall.ultraviewpager.UltraViewPager;
 import com.tmall.ultraviewpager.transformer.UltraDepthScaleTransformer;
+
+import app.compsci702g6.R;
+import app.compsci702g6.Services.CalculateService;
 
 public class UIActivity extends AppCompatActivity {
 

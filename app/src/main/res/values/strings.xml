@@ -15,6 +15,15 @@
         <item>Basketball</item>
         <item>Weight Training</item>
     </string-array>
+    <string-array name="numbers">
+        <item>1206825053</item>
+        <item>1724035790</item>
+        <item>2109408496</item>
+        <item>1440076954</item>
+        <item>1105411183</item>
+        <item>1399511406</item>
+        <item>1216966440</item>
+    </string-array>
     <string name="calculate_minutes">Calculate Time</string>
     <string name="calculate_calories">Calculate Calories</string>
     <string name="exercise_time">How long will you do the exercise for?</string>

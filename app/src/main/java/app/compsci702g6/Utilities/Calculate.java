@@ -1,4 +1,4 @@
-package app.compsci702g6;
+package app.compsci702g6.Utilities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +8,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import app.compsci702g6.Activities.DisplayActivity;
+import app.compsci702g6.Activities.MainActivity;
+import app.compsci702g6.R;
 
 public class Calculate extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     public static final String EXTRA_MESSAGE = "app.compsci701g6.ACTIVITY_MESSAGE";
