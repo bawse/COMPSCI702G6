@@ -1,4 +1,4 @@
-package app.compsci702g6;
+package app.compsci702g6.Utilities;
 
 /**
  * Created by Jay on 4/29/2017.
