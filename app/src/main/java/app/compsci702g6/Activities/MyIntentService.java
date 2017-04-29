@@ -1,4 +1,4 @@
-package app.compsci702g6;
+package app.compsci702g6.Activities;
 
 import android.app.IntentService;
 import android.content.Intent;

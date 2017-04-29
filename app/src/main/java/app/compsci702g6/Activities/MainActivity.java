@@ -1,9 +1,12 @@
-package app.compsci702g6;
+package app.compsci702g6.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import app.compsci702g6.Utilities.Calculate;
+import app.compsci702g6.R;
 
 public class MainActivity extends Activity {
     public static final String EXTRA_MESSAGE = "app.compsci702g6.CALCULATE_MESSAGE";
