@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="60dp"
+    android:layout_height="80dp"
+
+    tools:context=".Activities.UIActivity">
+
+
+    <ImageView
+        android:id="@+id/image_sport"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:tint="@color/grey_500"
+        android:scaleType="centerInside"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@+id/text_size"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true"
+        android:layout_weight="5"
+        android:height="15dp"
+        android:lines="1"
+        android:gravity="bottom"
+        android:text="Run"
+        android:fontFamily="sans-serif"
+        android:textSize="7pt"
+        android:textStyle="bold" />
+
+</RelativeLayout>

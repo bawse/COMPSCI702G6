@@ -15,8 +15,36 @@
         <item>Basketball</item>
         <item>Weight Training</item>
     </string-array>
+    <string-array name="numbers">
+        <item>1206825053</item>
+        <item>1724035790</item>
+        <item>2109408496</item>
+        <item>1440076954</item>
+        <item>1105411183</item>
+        <item>1399511406</item>
+        <item>1216966440</item>
+    </string-array>
+    <string-array name="keys">
+        <item>753652</item>
+        <item>394263</item>
+        <item>465249</item>
+        <item>497556</item>
+        <item>4a7036</item>
+        <item>414d4b</item>
+        <item>777751</item>
+        <item>704761</item>
+        <item>61776d</item>
+        <item>397045</item>
+        <item>674a4e</item>
+        <item>75444a</item>
+        <item>32566c</item>
+        <item>000043</item>
+    </string-array>
     <string name="calculate_minutes">Calculate Time</string>
     <string name="calculate_calories">Calculate Calories</string>
     <string name="exercise_time">How long will you do the exercise for?</string>
     <string name="food_name">Food name</string>
+    <string name="title_activity_ui">Calories Calculator</string>
+    <string name="title_exercise">Exercise</string>
+    <string name="title_food">Food</string>
 </resources>

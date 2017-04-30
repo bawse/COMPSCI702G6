@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="app.compsci702g6.DisplayActivity">
+    tools:context="app.compsci702g6.Activities.DisplayActivity">
 
     <TextView
         android:id="@+id/textView9"

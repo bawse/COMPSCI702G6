@@ -1,13 +1,18 @@
-package app.compsci702g6;
+package app.compsci702g6.Utilities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+
+import app.compsci702g6.Activities.DisplayActivity;
+import app.compsci702g6.Activities.MainActivity;
+import app.compsci702g6.R;
 
 public class Calculate extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     public static final String EXTRA_MESSAGE = "app.compsci701g6.ACTIVITY_MESSAGE";
@@ -21,17 +26,24 @@ public class Calculate extends AppCompatActivity implements AdapterView.OnItemSe
         Intent intent = getIntent();
         String activity = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 
-        if (activity.equalsIgnoreCase("minutes")) {
-            setContentView(R.layout.activity_calculate_minutes);
-            activityMinutes = "true";
 
-            createSpinner();
-        }
-        else {
-            setContentView(R.layout.activity_calculate_calories);
-            activityMinutes = "false";
+        try {
+            if (activity.equalsIgnoreCase("minutes")) {
+                setContentView(R.layout.activity_calculate_minutes);
+                activityMinutes = "true";
 
-            createSpinner();
+                createSpinner();
+            } else if (activity.equalsIgnoreCase("hours")){
+                activityMinutes = Utility.calculate(activity);
+            } else {
+                setContentView(R.layout.activity_calculate_calories);
+                activityMinutes = "false";
+
+                createSpinner();
+            }
+        } catch (Exception e){
+            Log.d("error", intent.getAction().trim().toString());
+
         }
     }
 
@@ -47,7 +59,7 @@ public class Calculate extends AppCompatActivity implements AdapterView.OnItemSe
 
             intent.putExtra(EXTRA_MESSAGE, new String[] {"true", caloriesString, weightString, ratio});
         }
-        else {
+        else if (activityMinutes.equalsIgnoreCase("false")){
             EditText editText = (EditText) findViewById(R.id.editText2);
             String timeString = editText.getText().toString();
 
@@ -55,6 +67,11 @@ public class Calculate extends AppCompatActivity implements AdapterView.OnItemSe
             String weightString = editText2.getText().toString();
 
             intent.putExtra(EXTRA_MESSAGE, new String[] {"false", timeString, weightString, ratio});
+        } else {
+            EditText editText = (EditText) findViewById(R.id.editText2);
+            String timeString = editText.getText().toString();
+
+            intent.putExtra(EXTRA_MESSAGE, new String[] {"false", timeString, "70kg", ratio});
         }
 
         startActivity(intent);
