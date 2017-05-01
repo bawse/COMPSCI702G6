@@ -106,14 +106,17 @@ public class CalculateService extends Service {
         final String searchTerm = food_name;
 
         RequestParams params = new RequestParams();
-        params.put("api_key", "u6R9BcFRIIuVJp6AMKwwQpGaawm9pEgJNuDJ2VlC");
-        params.put("format", "json");
+        
+        params.put(Encryptor.decrypt(Encryptor.key, Encryptor.initVector, "ObEuSc2mO8aO8ifZfFKrRA=="),
+                Encryptor.decrypt(Encryptor.key, Encryptor.initVector, "P8/azP9rshmQxiuuGdjOi2oZ8Tz23m+Z2JV2IVGMIA7M692IXo4A12ciCe9qouie"));
+        params.put("format", Encryptor.decrypt(Encryptor.key, Encryptor.initVector, "ctze8KiyNCHZ1gLGnyTooQ=="));
         params.put("q", searchTerm);
         params.put("max", "1"); // The api call will return only one result.
 
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.get("https://api.nal.usda.gov/ndb/search", params, new AsyncHttpResponseHandler() {
+        client.get(Encryptor.decrypt(Encryptor.key, Encryptor.initVector, "lsdETk/Pha4UzNE8kNWZRKCx4Wh15UM7aO97Xcw6aQSuyg07HxJB0ybU2jWT8C8z"),
+                params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 try {
@@ -141,11 +144,12 @@ public class CalculateService extends Service {
             public void getFoodReport(String ndbno, final String foodName) {
                 RequestParams report_params = new RequestParams();
                 report_params.put("api_key", key);
-                report_params.put("format", "json");
+                report_params.put("format", Encryptor.decrypt(Encryptor.key, Encryptor.initVector, "ctze8KiyNCHZ1gLGnyTooQ=="));
                 report_params.put("ndbno", ndbno);
 
                 AsyncHttpClient report_client = new AsyncHttpClient();
-                report_client.get("https://api.nal.usda.gov/ndb/reports", report_params, new AsyncHttpResponseHandler() {
+                report_client.get(Encryptor.decrypt(Encryptor.key, Encryptor.initVector, "lsdETk/Pha4UzNE8kNWZRDfT4+/FA+d2O/Nyvh0tBlwxAgHkBLMQeByNbDjbj6gI"),
+                        report_params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         String response = new String(responseBody);
@@ -161,11 +165,7 @@ public class CalculateService extends Service {
                                     double kcal = nutrient.getDouble("value");
                                     Intent intent = new Intent("api_result");
 
-                                    String encrypted = encrypt(Encryptor.key, Encryptor.initVector, "Hello World");
-                                    String decrypted = Encryptor.decrypt(Encryptor.key, Encryptor.initVector, encrypted);
-                                    String finalString = "Encrypted: " + encrypted + " Decrypted: " + decrypted;
-
-                                    intent.putExtra("message", "There are " +kcal + " calories in 100g of " + foodName + ". " + finalString);
+                                    intent.putExtra("message", "There are " +kcal + " calories in 100g of " + foodName);
                                     LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
 
                                 }
