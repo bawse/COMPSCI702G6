@@ -17,9 +17,18 @@ import org.json.JSONObject;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import app.compsci702g6.R;
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.conn.ssl.SSLSocketFactory;
 
 import static com.loopj.android.http.AsyncHttpClient.log;
 
@@ -114,6 +123,9 @@ public class CalculateService extends Service {
 
 
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(
+                new SSLSocketFactory(getSslContext(),
+                        SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER));
         client.get("https://api.nal.usda.gov/ndb/search", params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -146,6 +158,9 @@ public class CalculateService extends Service {
                 report_params.put("ndbno", ndbno);
 
                 AsyncHttpClient report_client = new AsyncHttpClient();
+                report_client.setSSLSocketFactory(
+                        new SSLSocketFactory(getSslContext(),
+                                SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER));
                 report_client.get("https://api.nal.usda.gov/ndb/reports", report_params, new AsyncHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
@@ -198,5 +213,36 @@ public class CalculateService extends Service {
         else
             return bytes[0]  & 0xFF ;
     }
+
+    public SSLContext getSslContext() {
+
+        TrustManager[] byPassTrustManagers = new TrustManager[] { new X509TrustManager() {
+            public X509Certificate[] getAcceptedIssuers() {
+                return new X509Certificate[0];
+            }
+
+            public void checkClientTrusted(X509Certificate[] chain, String authType) {
+            }
+
+            public void checkServerTrusted(X509Certificate[] chain, String authType) {
+            }
+        } };
+
+        SSLContext sslContext=null;
+
+        try {
+            sslContext = SSLContext.getInstance("TLS");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        try {
+            sslContext.init(null, byPassTrustManagers, new SecureRandom());
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        }
+
+        return sslContext;
+    }
+
 
 }
