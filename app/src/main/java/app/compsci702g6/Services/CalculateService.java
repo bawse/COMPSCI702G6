@@ -15,9 +15,21 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigInteger;
+import java.nio.ByteBuffer;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
+
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+
 import app.compsci702g6.R;
 import app.compsci702g6.Utilities.Encryptor;
 import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.conn.ssl.SSLSocketFactory;
 
 import static app.compsci702g6.Utilities.Encryptor.encrypt;
 import static com.loopj.android.http.AsyncHttpClient.log;
@@ -44,7 +56,6 @@ public class CalculateService extends Service {
         for(String s : keyarray){
             key += new String(toByteArray(Integer.parseInt(s,16)));
         }
-        log.e("bbb",key);
         return mBinder;
     }
     public class LocalBinder extends Binder {
@@ -58,47 +69,6 @@ public class CalculateService extends Service {
     }
     public double calculateTime(int weight, int calories,int sport){
 
-//        String s = "u6R9BcFRIIuVJp6AMKwwQpGaawm9pEgJNuDJ2VlC";
-//        String s1 = "u6R9BcFRIIu";
-//        String s2 ="VJp6AMKw";
-//        String s3 = "wQpGaawm9p";
-//        String s4 ="EgJNuDJ2VlC";;
-//        byte[] b = s.getBytes();
-//        while(s.length()>0){
-//            if(s.length()>3){
-//                //log.e("bbb",String.valueOf(ByteBuffer.wrap(s.substring(0,3).getBytes()).getInt()));
-//                byte[] sb = s.substring(0,3).getBytes();
-////                for(byte bb : sb){
-////                    log.e("bbb",String.valueOf(bb));
-////                }
-//                int in =  fromByteArray(sb);
-//               // log.e("bbb",String.valueOf(in));
-//                log.e("bbb",Integer.toHexString(in));
-//                log.e("bbb",new String(toByteArray(in)));
-//                //s = "";
-//                s = s.substring(3,s.length());
-//            }
-//            else {
-//
-//                byte[] sb = s.substring(0,s.length()).getBytes();
-////                for(byte bb : sb){
-////                    log.e("bbb",String.valueOf(bb));
-////                }
-//                int in =  fromByteArray(sb);
-//                // log.e("bbb",String.valueOf(in));
-//                log.e("bbb",Integer.toHexString(in));
-//                log.e("bbb",new String(toByteArray(in)));
-//                //s = "";
-//                //log.e("bbb",new String(s.substring(0,s.length()).getBytes()));
-//                s = "";
-//            }
-//        }
-//        for(byte y : b ){
-//            log.e("aaa",String.valueOf(y));
-//        }
-//        for(int i  = 0 ; i < s.length();i++){
-//            log.e("aaa",String.valueOf(Character.digit(s.charAt(i),10)));
-//        }
         return  calories/(weight*ratios[sport]);
     }
     public void search(String food_name) {
@@ -110,11 +80,16 @@ public class CalculateService extends Service {
         params.put(Encryptor.decrypt(Encryptor.key, Encryptor.initVector, "ObEuSc2mO8aO8ifZfFKrRA=="),
                 Encryptor.decrypt(Encryptor.key, Encryptor.initVector, "P8/azP9rshmQxiuuGdjOi2oZ8Tz23m+Z2JV2IVGMIA7M692IXo4A12ciCe9qouie"));
         params.put("format", Encryptor.decrypt(Encryptor.key, Encryptor.initVector, "ctze8KiyNCHZ1gLGnyTooQ=="));
+
         params.put("q", searchTerm);
         params.put("max", "1"); // The api call will return only one result.
 
 
         AsyncHttpClient client = new AsyncHttpClient();
+        client.setSSLSocketFactory(
+                new SSLSocketFactory(getSslContext(),
+                        SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER));
+      
         client.get(Encryptor.decrypt(Encryptor.key, Encryptor.initVector, "lsdETk/Pha4UzNE8kNWZRKCx4Wh15UM7aO97Xcw6aQSuyg07HxJB0ybU2jWT8C8z"),
                 params, new AsyncHttpResponseHandler() {
             @Override
@@ -148,8 +123,13 @@ public class CalculateService extends Service {
                 report_params.put("ndbno", ndbno);
 
                 AsyncHttpClient report_client = new AsyncHttpClient();
+                report_client.setSSLSocketFactory(
+                        new SSLSocketFactory(getSslContext(),
+                                SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER));
+
                 report_client.get(Encryptor.decrypt(Encryptor.key, Encryptor.initVector, "lsdETk/Pha4UzNE8kNWZRDfT4+/FA+d2O/Nyvh0tBlwxAgHkBLMQeByNbDjbj6gI"),
                         report_params, new AsyncHttpResponseHandler() {
+
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                         String response = new String(responseBody);
@@ -185,6 +165,35 @@ public class CalculateService extends Service {
 
 
     }
+    public SSLContext getSslContext() {
+
+        TrustManager[] byPassTrustManagers = new TrustManager[] { new X509TrustManager() {
+            public X509Certificate[] getAcceptedIssuers() {
+                return new X509Certificate[0];
+            }
+
+            public void checkClientTrusted(X509Certificate[] chain, String authType) {
+            }
+
+            public void checkServerTrusted(X509Certificate[] chain, String authType) {
+            }
+        } };
+
+        SSLContext sslContext=null;
+
+        try {
+            sslContext = SSLContext.getInstance("TLS");
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        try {
+            sslContext.init(null, byPassTrustManagers, new SecureRandom());
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+        }
+
+        return sslContext;
+    }
     byte[] toByteArray(int value) {
         if(value >128)
         return new byte[] {
@@ -195,11 +204,4 @@ public class CalculateService extends Service {
             return new byte[] {
                     (byte)(value )};
     }
-    int fromByteArray(byte[] bytes) {
-        if(bytes.length>1)
-        return bytes[0] << 16 | (bytes[1] & 0xFF) << 8 | (bytes[2] & 0xFF) ;
-        else
-            return bytes[0]  & 0xFF ;
-    }
-
 }
