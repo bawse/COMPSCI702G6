@@ -35,6 +35,7 @@ import com.tmall.ultraviewpager.transformer.UltraDepthScaleTransformer;
 
 import app.compsci702g6.R;
 import app.compsci702g6.Services.CalculateService;
+import app.compsci702g6.Utilities.Encryptor;
 
 public class UIActivity extends AppCompatActivity {
 
@@ -554,7 +555,7 @@ public class UIActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             // Extract data included in the Intent
-            String message = intent.getStringExtra("message");
+            String message = intent.getStringExtra(Encryptor.decrypt(Encryptor.key, Encryptor.initVector, "JgRBEVH8W+Sb6NJy28uxLg=="));
             ((TextView) findViewById(R.id.api_response)).setText(message);
             final ProgressBar progressBar = (ProgressBar) findViewById(R.id.progressBar);
             progressBar.setVisibility(View.GONE);
