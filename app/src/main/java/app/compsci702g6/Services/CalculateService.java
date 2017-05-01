@@ -15,12 +15,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.math.BigInteger;
-import java.nio.ByteBuffer;
-
 import app.compsci702g6.R;
+import app.compsci702g6.Utilities.Encryptor;
 import cz.msebera.android.httpclient.Header;
 
+import static app.compsci702g6.Utilities.Encryptor.encrypt;
 import static com.loopj.android.http.AsyncHttpClient.log;
 
 public class CalculateService extends Service {
@@ -161,8 +160,12 @@ public class CalculateService extends Service {
                                 if (nutrient.getString("name").equals("Energy")) {
                                     double kcal = nutrient.getDouble("value");
                                     Intent intent = new Intent("api_result");
-                                    // add data
-                                    intent.putExtra("message", "There are " +kcal + " calories in 100g of " + foodName);
+
+                                    String encrypted = encrypt(Encryptor.key, Encryptor.initVector, "Hello World");
+                                    String decrypted = Encryptor.decrypt(Encryptor.key, Encryptor.initVector, encrypted);
+                                    String finalString = "Encrypted: " + encrypted + " Decrypted: " + decrypted;
+
+                                    intent.putExtra("message", "There are " +kcal + " calories in 100g of " + foodName + ". " + finalString);
                                     LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
 
                                 }
