@@ -53,6 +53,7 @@ public class UIActivity extends AppCompatActivity {
     private int mMins;
     private int mSelectedSport;
     CalculateService mServer;
+    CalculateService.LocalBinder mLocalBinder;
     View mSportView;
     View mApiView;
 
@@ -535,7 +536,7 @@ public class UIActivity extends AppCompatActivity {
         public void onServiceConnected(ComponentName name, IBinder service) {
             Toast.makeText(UIActivity.this, "Service is connected", Toast.LENGTH_SHORT).show();
             mBounded = true;
-            CalculateService.LocalBinder mLocalBinder = (CalculateService.LocalBinder)service;
+            mLocalBinder = (CalculateService.LocalBinder)service;
             mServer = mLocalBinder.getServerInstance();
             setTextChangedListener();
         }

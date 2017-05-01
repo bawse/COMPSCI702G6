@@ -194,5 +194,4 @@ public class CalculateService extends Service {
             return new byte[] {
                     (byte)(value )};
     }
-
 }
