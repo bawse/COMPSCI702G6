@@ -106,7 +106,7 @@ public class CalculateService extends Service {
         final String searchTerm = food_name;
 
         RequestParams params = new RequestParams();
-        
+
         params.put(Encryptor.decrypt(Encryptor.key, Encryptor.initVector, "ObEuSc2mO8aO8ifZfFKrRA=="),
                 Encryptor.decrypt(Encryptor.key, Encryptor.initVector, "P8/azP9rshmQxiuuGdjOi2oZ8Tz23m+Z2JV2IVGMIA7M692IXo4A12ciCe9qouie"));
         params.put("format", Encryptor.decrypt(Encryptor.key, Encryptor.initVector, "ctze8KiyNCHZ1gLGnyTooQ=="));
