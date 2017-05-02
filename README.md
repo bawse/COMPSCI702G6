@@ -1,16 +1,18 @@
 # COMPSCI702G6
-The App name is Calories Calculator, the first function, Exercise takes your weight as the first input	calculate the calories burned when you input exercise type and length of time, while calculating the length of time when you input calories you want to burn and which exercise you are doing. The second function tells you how much calories you gain when you input a food name.
 
-Inputs and output	
+**Description**
+The app. name is Calories Calculator. The first function, Exercise, calculates the calories burnt using the user's weight, type of exercise and length of time. The function, Exercise, is also able to calculate the amount of exercise time needed to burn target calories. The second function, Food, gives the user the number of calories contained in the food inputted by the user.
 
-1)Exercise(calculating calories burned)
+**Inputs and Output**	
+
+1) Exercise (calculating calories burned)
 Inputs: user’s weight, type of exercise, length of exercise time.
-Outputs: burned calories
+Outputs: burnt calories
 
-2)Exercise(calculating exercise time)
-Inputs: user’s weight, type of exercise, target burned calories.
+2) Exercise (calculating exercise time)
+Inputs: user’s weight, type of exercise, target calories to be burnt.
 Outputs: length of exercise time.
 
-3)Food
+3) Food
 Input: name of the food
-Output: calories contained by this food
+Output: calories contained in this food
